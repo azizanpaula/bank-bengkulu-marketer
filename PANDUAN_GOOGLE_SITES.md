@@ -1,11 +1,17 @@
 # 🏦 Panduan Implementasi Aplikasi Monitoring Target AO Bank Bengkulu di Google Sites
 
 > [!IMPORTANT]
-> ### 🌐 SITUS GOOGLE SITES TELAH AKTIF & DIPUBLIKASIKAN:
-> **URL Publik Resmi**: 👉 **[https://sites.google.com/view/marketerbbc/halaman-muka](https://sites.google.com/view/marketerbbc/halaman-muka)**  
-> **Status Tata Letak**: **100% Optimal** (Lebar penuh 12-kolom `1154px`, Tinggi nyaman `1301px`, Header minimalis tanpa pemborosan vertikal, Navigasi Atas Transparan, dan Mendukung Mode Layar Penuh).
+> ### 🌐 DUA PILIHAN TAMPILAN RESMI:
+> 
+> 1. **🖥️ Mode 100% Layar Penuh (Edge-to-Edge Fullscreen — Rekomendasi Pimpinan)**:  
+>    👉 **[https://azizanpaula.github.io/bank-bengkulu-marketer/](https://azizanpaula.github.io/bank-bengkulu-marketer/)**  
+>    *Kelebihan: 100% layar penuh tanpa margin samping, tanpa batasan frame Google Sites, dapat di-fullscreen penuh ke monitor (F11 / Ctrl+Cmd+F).*
+> 
+> 2. **📑 Mode Portal Intranet Google Sites**:  
+>    👉 **[https://sites.google.com/view/marketerbbc/halaman-muka](https://sites.google.com/view/marketerbbc/halaman-muka)**  
+>    *Dilengkapi tombol emas di atas dashboard untuk membuka mode layar penuh 100% sekali klik.*
 
-Selamat datang! Dokumen ini adalah panduan lengkap dan profesional untuk menerapkan dan mengelola **Aplikasi Monitoring Target Account Officer (AO Kredit & AO Pemasaran) PT Bank Pembangunan Daerah Bengkulu (Bank Bengkulu)** menggunakan platform **Google Sites**.
+Selamat datang! Dokumen ini adalah panduan lengkap dan profesional untuk menerapkan dan mengelola **Aplikasi Monitoring Target Account Officer (AO Kredit & AO Pemasaran) PT Bank Pembangunan Daerah Bengkulu (Bank Bengkulu)**.
 
 ---
 
