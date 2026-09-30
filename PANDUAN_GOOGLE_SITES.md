@@ -101,11 +101,11 @@ Metode ini adalah cara paling instan dan paling stabil untuk menampilkan dashboa
 
 Jika Anda ingin divisi bisnis atau supervisor di masing-masing cabang cukup menginput data target dan realisasi di spreadsheet, dan dashboard di Google Sites langsung otomatis menampilkan data terbaru:
 
-### Langkah 1: Buat Dokumen Google Sheets
-1. Buka [https://sheets.google.com/](https://sheets.google.com/) dan buat spreadsheet baru.
-2. Beri nama: `Database_Target_AO_Bank_Bengkulu`.
-3. Salin kolom dan data dari file template yang kami sediakan: **`template_data_ao_bank_bengkulu.csv`**.
-4. Struktur kolom Google Sheets wajib mengikuti urutan berikut:
+### Langkah 1: Akses Spreadsheet Database di Google Drive Anda
+Dokumen spreadsheet database telah kami buatkan secara otomatis langsung di Google Drive Anda:
+👉 **[Database_SMART_AO_Bank_Bengkulu (Google Drive)](https://docs.google.com/spreadsheets/d/1eldnGb4dH361bbn9DhH8yxgEy5IMHnr1UaHllgSXSiI/edit)**
+
+Data telah disiapkan dengan struktur tabel perbankan standar resmi Bank Bengkulu:
 
 | Kolom A | Kolom B | Kolom C | Kolom D | Kolom E | Kolom F | Kolom G | Kolom H | Kolom I |
 |---|---|---|---|---|---|---|---|---|
