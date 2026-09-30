@@ -1,0 +1,23 @@
+Kategori,NIP,Nama,Cabang,Target_Juta,Realisasi_Juta,NPL_atau_CASA,NoA_Nasabah,Kol2_DPK
+kredit,BB-1988021,Agus Triono S.E. M.M.,KC Utama Bengkulu,15000,16850,0.42,104,0.85
+kredit,BB-1992045,Dedi Kurniawan S.E.,KC Curup,12000,12450,0.65,80,1.45
+kredit,BB-1990112,Bambang Supriyadi S.P.,KC Mukomuko,14000,14700,0.88,88,1.65
+kredit,BB-1994034,Rian Pratama S.E.,KC Manna,10000,9800,1.15,62,2.40
+kredit,BB-1995078,Faisal Akbar S.Ak.,KC Arga Makmur,11000,11500,0.55,74,1.20
+kredit,BB-1996101,Rizki Ilham Syahputra S.E.,KC Kaur,8000,8250,0.90,53,2.10
+kredit,BB-1993084,Hendra Gunawan S.Kom.,KC Seluma,9000,7850,1.80,49,3.20
+kredit,BB-1997019,Wahyu Hidayat S.E.,KC Kepahiang,8500,8900,0.70,58,1.50
+kredit,BB-1991056,Eko Wahyudi S.E.,KC Bengkulu Tengah,9500,10100,0.60,66,1.30
+kredit,BB-1998067,Ari Wibowo S.M.,KC Muara Aman,7500,5800,2.10,38,4.50
+kredit,BB-1990099,Tomi Wijaya S.E. M.Si.,KC Jakarta,20000,22100,0.35,45,0.70
+kredit,BB-1994119,Dimas Anggara S.E.,KC Utama Bengkulu,13000,13800,0.50,85,1.10
+pemasaran,BB-2019012,Siti Nurhaliza S.E.,KC Utama Bengkulu,25000,27800,68.5,340,0
+pemasaran,BB-2020034,Annisa Rahmawati S.Ak.,KC Curup,18000,19400,64.2,280,0
+pemasaran,BB-2021077,Putri Ayu Wandira S.Kom.,KC Arga Makmur,16000,16900,62.0,245,0
+pemasaran,BB-2018090,Maya Sartika S.E.,KC Manna,15000,14200,58.4,210,0
+pemasaran,BB-2022041,Rina Oktavia S.E.,KC Mukomuko,17000,18200,65.0,260,0
+pemasaran,BB-2019114,Nanda Pratama S.E.,KC Kaur,12000,12500,61.2,190,0
+pemasaran,BB-2020088,Dewi Lestari S.Ak.,KC Kepahiang,13000,13600,63.8,215,0
+pemasaran,BB-2021102,Budi Santoso S.M.,KC Seluma,13500,11200,52.0,175,0
+pemasaran,BB-2017049,Muhammad Ilham S.E.,KC Bengkulu Tengah,14500,15300,66.0,230,0
+pemasaran,BB-2016015,Vivi Andriani S.E. M.M.,KC Jakarta,35000,39500,72.5,160,0
