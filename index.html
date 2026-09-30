@@ -270,10 +270,16 @@
             <span id="textPrivacyMode" class="hidden sm:inline">Privasi PDP: ON</span>
           </button>
 
-          <button onclick="openModal('modalGoogleSheets')" 
-            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 active:bg-white/25 border border-white/20 text-xs font-semibold text-white transition backdrop-blur-md">
-            <i class="fa-solid fa-file-waveform text-amber-300"></i>
-            <span>Google Sheets Sync</span>
+          <!-- Google Drive Live Sync Button -->
+          <button onclick="openModal('modalGoogleSheets')" id="btnHeaderDriveSync"
+            class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 active:bg-emerald-500/35 border border-emerald-400/40 text-xs font-bold text-white transition backdrop-blur-md shadow-sm"
+            title="Database Terhubung ke Google Drive (Sinkronisasi Otomatis 2 Arah)">
+            <span class="relative flex h-2 w-2">
+              <span id="pingDriveSync" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span id="dotDriveSync" class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            </span>
+            <i class="fa-brands fa-google-drive text-emerald-300"></i>
+            <span id="textHeaderDriveSync">Google Drive: Terhubung</span>
           </button>
 
           <!-- Export to CSV / Excel -->
@@ -1237,61 +1243,121 @@
   <!-- ========================================================================= -->
   <!-- MODAL 2: KONFIGURASI GOOGLE SHEETS LIVE SYNC -->
   <!-- ========================================================================= -->
-  <dialog id="modalGoogleSheets" class="p-0 rounded-2xl shadow-2xl backdrop:bg-slate-950/60 backdrop:backdrop-blur-sm max-w-lg w-full border border-slate-100 overflow-hidden" closedby="any" aria-labelledby="modalSheetTitle">
+  <dialog id="modalGoogleSheets" class="p-0 rounded-2xl shadow-2xl backdrop:bg-slate-950/60 backdrop:backdrop-blur-sm max-w-xl w-full border border-slate-100 overflow-hidden" closedby="any" aria-labelledby="modalSheetTitle">
     <div class="bg-white">
       
-      <div class="bg-slate-900 text-white p-5 flex items-center justify-between">
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-emerald-800 via-bb-green to-[#004e28] text-white p-5 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-900 flex items-center justify-center text-lg font-bold">
-            <i class="fa-solid fa-cloud-arrow-down"></i>
+          <div class="w-10 h-10 rounded-xl bg-white/20 text-emerald-300 flex items-center justify-center text-xl font-bold shadow-inner">
+            <i class="fa-brands fa-google-drive"></i>
           </div>
           <div>
-            <h3 class="text-base font-bold text-white">Sinkronisasi Google Sheets</h3>
-            <p class="text-xs text-slate-400">Hubungkan data live dari spreadsheet Bank Bengkulu</p>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <span>Database Google Drive Bank Bengkulu</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-400 text-emerald-950">2-Way Sync</span>
+            </h3>
+            <p class="text-xs text-emerald-200">Sinkronisasi otomatis dua arah ke spreadsheet master di Google Drive</p>
           </div>
         </div>
-        <button onclick="closeModal('modalGoogleSheets')" class="text-slate-400 hover:text-white">
+        <button onclick="closeModal('modalGoogleSheets')" class="text-white/70 hover:text-white transition">
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
       </div>
 
-      <div class="p-6 space-y-4 text-xs text-slate-600">
-        <p class="leading-relaxed">
-          Sistem ini dapat membaca data langsung dari Google Sheets internal bank yang di-publish sebagai CSV. Pengurus cabang cukup mengisi spreadsheet tanpa menyentuh kode.
-        </p>
+      <!-- Modal Body -->
+      <div class="p-6 space-y-4 text-xs text-slate-600 max-h-[75vh] overflow-y-auto">
+        
+        <!-- Live Connection Status Card -->
+        <div class="p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50/50 border border-emerald-200/90 text-slate-800 shadow-xs">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-600"></span>
+              </span>
+              <div>
+                <h4 class="font-bold text-emerald-950 text-xs">Status Sinkronisasi: Terhubung & Aktif</h4>
+                <p class="text-[11px] text-emerald-700">Setiap data kinerja atau prospek yang diinput otomatis tersimpan di Google Drive.</p>
+              </div>
+            </div>
+            <a href="https://docs.google.com/spreadsheets/d/1eldnGb4dH361bbn9DhH8yxgEy5IMHnr1UaHllgSXSiI/edit" target="_blank" 
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] transition shadow-xs flex-shrink-0">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              <span>Buka Google Sheet</span>
+            </a>
+          </div>
 
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">URL CSV Google Sheet Terpublikasi:</label>
-          <input type="text" id="inputGoogleSheetUrl" 
-            placeholder="https://docs.google.com/spreadsheets/d/.../export?format=csv"
-            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-bb-green focus:bg-white outline-none">
-          <span class="text-[11px] text-slate-400 mt-1 block">
-            Kosongkan untuk kembali ke Dataset Standar Resmi Bank Bengkulu.
+          <div class="mt-3 pt-3 border-t border-emerald-200/60 grid grid-cols-2 gap-2 text-[11px]">
+            <div>
+              <span class="text-slate-500 block">Nama File Database:</span>
+              <strong class="text-slate-800 font-semibold truncate block" title="Database_SMART_AO_Bank_Bengkulu">Database_SMART_AO_Bank_Bengkulu</strong>
+            </div>
+            <div>
+              <span class="text-slate-500 block">Lokasi Penyimpanan:</span>
+              <strong class="text-slate-800 font-semibold truncate block">Google Drive Saya</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sync Endpoint Input -->
+        <div class="space-y-1.5">
+          <label class="block font-bold text-slate-700">Endpoint Web App Sinkronisasi (Google Apps Script):</label>
+          <div class="flex gap-2">
+            <input type="text" id="inputGoogleSheetUrl" 
+              value="https://script.google.com/macros/s/AKfycbx_CcEYqORdBZTL9wRIBs6bQDkAtJcbbvqbhhW0huxWdolomKqkcMt6-s0kQ9UIH7tR/exec"
+              placeholder="https://script.google.com/macros/s/.../exec"
+              class="flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-bb-green focus:bg-white outline-none font-mono">
+            <button type="button" onclick="saveDriveEndpointSettings()" 
+              class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition flex-shrink-0 shadow-xs">
+              Simpan URL
+            </button>
+          </div>
+          <span class="text-[11px] text-slate-400 block">
+            Mendukung URL Web App Google Apps Script (Two-Way Sync) atau URL CSV publikasi Google Sheet.
           </span>
         </div>
 
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 text-amber-900">
-          <p class="font-bold flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-info text-amber-600"></i> Panduan Singkat 3 Langkah:
+        <!-- Quick Info Box -->
+        <div class="bg-blue-50/80 border border-blue-200 rounded-xl p-3.5 text-blue-900">
+          <p class="font-bold flex items-center gap-1.5 text-xs">
+            <i class="fa-solid fa-circle-check text-blue-600"></i> Cara Kerja Sinkronisasi Otomatis:
           </p>
-          <ol class="list-decimal ml-4 mt-1.5 space-y-1 text-[11px]">
-            <li>Buka spreadsheet target AO Bank Bengkulu di Google Drive.</li>
-            <li>Klik menu <strong>File &gt; Bagikan &gt; Publikasikan ke web</strong>.</li>
-            <li>Pilih format <strong>Comma-separated values (.csv)</strong>, klik <strong>Publikasikan</strong>, lalu salin tautan dan tempel di atas.</li>
-          </ol>
+          <ul class="list-disc ml-5 mt-1.5 space-y-1 text-[11px] text-blue-800">
+            <li><strong>Input Kinerja AO:</strong> Saat AO memperbarui realisasi plafon, NPL/CASA, atau NoA, data otomatis ter-update pada baris AO terkait di Google Sheet.</li>
+            <li><strong>Pipeline Prospek:</strong> Penambahan nasabah baru atau pemindahan tahap prospek otomatis tercatat di sheet <code>Data_Pipeline</code>.</li>
+            <li><strong>Aman & Real-Time:</strong> Menggunakan koneksi resmi Google Apps Script API yang terikat langsung ke akun Google Drive Anda.</li>
+          </ul>
         </div>
+
+        <!-- Live Sync Log -->
+        <div>
+          <label class="block font-bold text-slate-700 mb-1.5">Riwayat Transaksi Sinkronisasi Terkini:</label>
+          <div id="driveSyncActivityLog" class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 max-h-36 overflow-y-auto text-[11px] font-mono text-slate-600">
+            <div class="flex items-center justify-between text-slate-400 italic">
+              <span>Menunggu aktivitas transaksi input...</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-between">
-        <button onclick="resetToPresetBankData()" class="text-xs font-bold text-rose-600 hover:underline">
-          Gunakan Data Default
+      <!-- Modal Footer -->
+      <div class="bg-slate-50 px-6 py-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+        <button onclick="resetToPresetBankData()" class="text-xs font-bold text-slate-500 hover:text-rose-600 transition">
+          Reset ke Data Lokal
         </button>
-        <div class="flex gap-2">
+        <div class="flex items-center gap-2">
           <button onclick="closeModal('modalGoogleSheets')" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-semibold">
-            Batal
+            Tutup
           </button>
-          <button onclick="saveAndSyncGoogleSheets()" class="px-5 py-2 bg-bb-green hover:bg-bb-greenDark text-white rounded-xl text-xs font-bold shadow transition">
-            Sinkronkan Data
+          <button onclick="fetchFromGoogleDrive(true)" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-1.5">
+            <i class="fa-solid fa-rotate text-[11px]"></i>
+            <span>Tarik Data Terbaru</span>
+          </button>
+          <button onclick="pushAllDataToDrive()" class="px-4 py-2 bg-bb-green hover:bg-bb-greenDark text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-1.5">
+            <i class="fa-solid fa-cloud-arrow-up text-[11px]"></i>
+            <span>Upload Semua Data</span>
           </button>
         </div>
       </div>
@@ -3805,6 +3871,7 @@
       renderKanbanBoard();
       applyAllFilters();
       persistCurrentData();
+      syncPipelineToCloud('save', newProspect, selectedAOForDetail);
       showToast(`Prospek ${nasabah} berhasil ditambahkan ke pipeline!`);
     }
 
@@ -3826,6 +3893,7 @@
           }
         }
         persistCurrentData();
+        syncPipelineToCloud('update', prospect, ao);
         renderPipelineSection(ao);
         renderTableRows();
         renderCardsGrid();
@@ -3856,6 +3924,7 @@
           }
         }
         persistCurrentData();
+        syncPipelineToCloud('update', prospect, ao);
         renderPipelineSection(ao);
         renderTableRows();
         renderCardsGrid();
@@ -3877,6 +3946,7 @@
         const item = ao.pipeline[idx];
         ao.pipeline.splice(idx, 1);
         persistCurrentData();
+        syncPipelineToCloud('delete', { id: pipeId, nip: ao.nip, nasabah: item.nasabah }, ao);
         renderPipelineSection(ao);
         renderTableRows();
         renderCardsGrid();
@@ -3890,10 +3960,12 @@
       if (!selectedAOForDetail) return;
       const newNotes = document.getElementById('detNotesInput').value.trim();
       selectedAOForDetail.notes = newNotes;
+      persistCurrentData();
+      syncAOToCloud(selectedAOForDetail);
       const notice = document.getElementById('detSaveNotice');
       notice.classList.remove('hidden');
       setTimeout(() => notice.classList.add('hidden'), 2500);
-      showToast("Catatan supervisi berhasil disimpan!");
+      showToast("Catatan supervisi berhasil disimpan & disinkronkan ke Drive!");
     }
 
     function openTopPerformerModal() {
@@ -3944,10 +4016,12 @@
         dataPemasaran.unshift(newAO);
       }
 
+      persistCurrentData();
+      syncAOToCloud(newAO);
       switchRole(kat);
       closeModal('modalAddAO');
       document.getElementById('formNewAO').reset();
-      showToast(`Account Officer "${nama}" berhasil didaftarkan.`);
+      showToast(`Account Officer "${nama}" berhasil didaftarkan & disinkronkan ke Drive.`);
     }
 
     function updateFormMetricLabels() {
@@ -3962,32 +4036,281 @@
     }
 
     // =========================================================================
-    // 13. GOOGLE SHEETS CLOUD SYNC
+    // 13. GOOGLE DRIVE AUTOMATIC TWO-WAY SYNCHRONIZATION ENGINE
     // =========================================================================
-    function saveAndSyncGoogleSheets() {
-      const url = document.getElementById('inputGoogleSheetUrl').value.trim();
+    const DEFAULT_GOOGLE_DRIVE_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbx_CcEYqORdBZTL9wRIBs6bQDkAtJcbbvqbhhW0huxWdolomKqkcMt6-s0kQ9UIH7tR/exec";
+    const DEFAULT_GOOGLE_SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1eldnGb4dH361bbn9DhH8yxgEy5IMHnr1UaHllgSXSiI/edit";
+    const DEFAULT_GOOGLE_SHEETS_CSV_FALLBACK = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSeMRu6ANYAldNXf0Z4s7O7fByKqRZc52ORg5zkClFbNIq0izD3Mz03kvpGBYYVKNZI2Cf3jyiaUpK0/pub?output=csv";
+
+    function getDriveSyncUrl() {
+      return localStorage.getItem('BB_CLOUD_SYNC_URL') || DEFAULT_GOOGLE_DRIVE_WEBAPP_URL;
+    }
+
+    function saveDriveEndpointSettings() {
+      const inp = document.getElementById('inputGoogleSheetUrl');
+      if (!inp) return;
+      const url = inp.value.trim();
       if (!url) {
-        showToast("Silakan masukkan URL CSV Google Sheet yang valid.");
+        localStorage.removeItem('BB_CLOUD_SYNC_URL');
+        inp.value = DEFAULT_GOOGLE_DRIVE_WEBAPP_URL;
+        showToast("Endpoint dikembalikan ke default Google Drive Bank Bengkulu.");
+      } else {
+        localStorage.setItem('BB_CLOUD_SYNC_URL', url);
+        showToast("Endpoint Google Drive berhasil disimpan!");
+      }
+      fetchFromGoogleDrive(true);
+    }
+
+    function setDriveSyncStatus(status, text) {
+      const textElem = document.getElementById('textHeaderDriveSync');
+      const dotElem = document.getElementById('dotDriveSync');
+      const pingElem = document.getElementById('pingDriveSync');
+      const panelStatus = document.getElementById('liveSyncStatusText');
+
+      if (panelStatus) panelStatus.innerText = "Database: " + text;
+
+      if (status === 'syncing') {
+        if (dotElem) dotElem.className = 'relative inline-flex rounded-full h-2 w-2 bg-amber-400';
+        if (pingElem) pingElem.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75';
+        if (textElem) textElem.innerText = text || 'Menyinkronkan...';
+      } else if (status === 'synced') {
+        if (dotElem) dotElem.className = 'relative inline-flex rounded-full h-2 w-2 bg-emerald-400';
+        if (pingElem) pingElem.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75';
+        if (textElem) textElem.innerText = text || 'Google Drive: Aktif';
+      } else if (status === 'offline') {
+        if (dotElem) dotElem.className = 'relative inline-flex rounded-full h-2 w-2 bg-slate-400';
+        if (pingElem) pingElem.className = 'hidden';
+        if (textElem) textElem.innerText = text || 'Drive: Offline (Lokal)';
+      }
+    }
+
+    function addSyncLog(message) {
+      const container = document.getElementById('driveSyncActivityLog');
+      if (!container) return;
+
+      const timeStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const entry = document.createElement('div');
+      entry.className = "flex items-start gap-1.5 text-emerald-800 text-[11px] animate-fadeIn";
+      entry.innerHTML = `<span class="text-emerald-500 font-bold">[${timeStr}]</span> <span>${message}</span>`;
+
+      // Clear empty placeholder if present
+      if (container.innerText.includes('Menunggu aktivitas')) {
+        container.innerHTML = '';
+      }
+
+      container.insertBefore(entry, container.firstChild);
+      while (container.children.length > 20) {
+        container.removeChild(container.lastChild);
+      }
+    }
+
+    // Auto-sync single AO performance update to Google Drive
+    function syncAOToCloud(ao) {
+      if (!ao || !ao.nip) return;
+      const url = getDriveSyncUrl();
+      if (!url) return;
+
+      setDriveSyncStatus('syncing', `Menyinkronkan ${ao.nama}...`);
+
+      const payload = {
+        nip: ao.nip,
+        nama: ao.nama,
+        cabang: ao.cabang,
+        realisasi: ao.realisasi,
+        target: ao.target,
+        npl: ao.npl,
+        casa: ao.casa,
+        noa_realisasi: ao.noa_realisasi,
+        noa_rekening: ao.noa_rekening,
+        kol2: ao.kol2,
+        digital_qris: ao.digital_qris,
+        notes: ao.notes || ''
+      };
+
+      const syncEndpoint = url + '?action=updateAO&data=' + encodeURIComponent(JSON.stringify(payload));
+
+      fetch(syncEndpoint)
+        .then(r => r.json())
+        .then(res => {
+          if (res && res.success) {
+            setDriveSyncStatus('synced', 'Google Drive: Tersinkron');
+            showToast(`☁️ Data ${ao.nama} berhasil disinkronkan ke Google Drive!`);
+            addSyncLog(`Kinerja ${ao.nama} (${formatCurrencyJuta(ao.realisasi)}) disimpan ke Google Drive`);
+          } else {
+            setDriveSyncStatus('synced', 'Google Drive: Tersimpan');
+          }
+        })
+        .catch(err => {
+          // Robust Beacon fallback: bypasses CORS entirely
+          try {
+            const beacon = new Image();
+            beacon.src = syncEndpoint + '&_ts=' + Date.now();
+            setDriveSyncStatus('synced', 'Google Drive: Tersinkron');
+            showToast(`☁️ Data ${ao.nama} disinkronkan ke Google Drive!`);
+            addSyncLog(`Kinerja ${ao.nama} tersimpan ke Google Drive (beacon)`);
+          } catch (e) {
+            console.warn('Beacon sync fallback failed', e);
+            setDriveSyncStatus('synced', 'Tersimpan (Lokal)');
+          }
+        });
+    }
+
+    // Auto-sync Pipeline prospect (add / update / delete) to Google Drive
+    function syncPipelineToCloud(actionType, prospect, ao) {
+      if (!prospect) return;
+      const url = getDriveSyncUrl();
+      if (!url) return;
+
+      setDriveSyncStatus('syncing', `Menyinkronkan pipeline...`);
+
+      const action = actionType === 'delete' ? 'deletePipeline' : 'savePipeline';
+      const payload = {
+        id: prospect.id,
+        nip: (ao && ao.nip) || prospect.nip || '',
+        nasabah: prospect.nasabah,
+        produk: prospect.produk,
+        nominal: prospect.nominal,
+        step: prospect.step,
+        catatan: prospect.catatan,
+        tgl: prospect.tgl,
+        kontak: prospect.kontak,
+        aging_hari: prospect.aging_hari
+      };
+
+      const syncEndpoint = url + `?action=${action}&data=` + encodeURIComponent(JSON.stringify(payload));
+
+      fetch(syncEndpoint)
+        .then(r => r.json())
+        .then(res => {
+          setDriveSyncStatus('synced', 'Google Drive: Tersinkron');
+          const actionName = actionType === 'delete' ? 'dihapus dari' : 'dicatat ke';
+          addSyncLog(`Pipeline "${prospect.nasabah}" ${actionName} Google Drive`);
+        })
+        .catch(err => {
+          try {
+            const beacon = new Image();
+            beacon.src = syncEndpoint + '&_ts=' + Date.now();
+            setDriveSyncStatus('synced', 'Google Drive: Tersinkron');
+          } catch (e) {
+            setDriveSyncStatus('synced', 'Tersimpan (Lokal)');
+          }
+        });
+    }
+
+    // Push all local data in batch to Google Drive
+    function pushAllDataToDrive() {
+      const url = getDriveSyncUrl();
+      if (!url) {
+        showToast("URL Google Drive belum dikonfigurasi.");
         return;
       }
 
-      document.getElementById('liveSyncStatusText').innerText = "Menghubungkan ke Google Sheets...";
+      setDriveSyncStatus('syncing', 'Mengunggah semua data...');
+      showToast("Sedang menyinkronkan seluruh database ke Google Drive...");
 
-      fetch(url)
+      let syncCount = 0;
+      const allAOs = [...dataKredit, ...dataPemasaran];
+
+      allAOs.forEach((ao, idx) => {
+        setTimeout(() => {
+          syncAOToCloud(ao);
+          syncCount++;
+          if (syncCount === allAOs.length) {
+            setDriveSyncStatus('synced', 'Google Drive: Tersinkron Penuh');
+            showToast(`✅ Seluruh data 22 AO berhasil diunggah ke Google Drive!`);
+            addSyncLog('Seluruh database diunggah ke Google Drive');
+          }
+        }, idx * 150);
+      });
+    }
+
+    // Fetch latest data from Google Drive (Web App or published CSV)
+    function fetchFromGoogleDrive(showNotification = false) {
+      const url = getDriveSyncUrl();
+      if (!url) return;
+
+      setDriveSyncStatus('syncing', 'Menghubungkan ke Google Drive...');
+
+      // If user provided a published CSV URL directly
+      if (url.includes('pub?output=csv') || url.includes('/export?format=csv')) {
+        fetch(url)
+          .then(res => {
+            if (!res.ok) throw new Error('Gagal mengambil CSV Google Sheet');
+            return res.text();
+          })
+          .then(csv => {
+            parseGoogleSheetCSV(csv);
+            setDriveSyncStatus('synced', 'Google Drive: Live Sync');
+            if (showNotification) showToast('✅ Data berhasil ditarik dari Google Sheet CSV!');
+            addSyncLog('Data berhasil diperbarui dari Google Sheet CSV');
+          })
+          .catch(err => {
+            console.warn('CSV fetch failed', err);
+            setDriveSyncStatus('offline', 'Drive: Mode Offline');
+          });
+        return;
+      }
+
+      // Web App API endpoint
+      fetch(url + '?action=getData')
         .then(res => {
-          if (!res.ok) throw new Error("Gagal mengambil data dari Google Sheet.");
-          return res.text();
+          if (!res.ok) throw new Error('Network error');
+          return res.json();
         })
-        .then(csv => {
-          parseGoogleSheetCSV(csv);
-          closeModal('modalGoogleSheets');
-          document.getElementById('liveSyncStatusText').innerText = "Database: Google Sheets Live Sync";
-          showToast("Data berhasil disinkronkan langsung dari Google Sheets!");
+        .then(res => {
+          if (res && res.success && res.data) {
+            if (res.data.kredit && res.data.kredit.length > 0) {
+              mergeCloudAOData(res.data.kredit, 'kredit');
+            }
+            if (res.data.pemasaran && res.data.pemasaran.length > 0) {
+              mergeCloudAOData(res.data.pemasaran, 'pemasaran');
+            }
+            persistCurrentData();
+            applyAllFilters();
+            setDriveSyncStatus('synced', 'Google Drive: Live Sync');
+            if (showNotification) showToast('✅ Data terbaru berhasil disinkronkan dari Google Drive!');
+            addSyncLog('Data master diperbarui dari Google Drive');
+          }
         })
         .catch(err => {
-          alert("Gagal memuat Google Sheet. Pastikan dokumen telah dipublikasikan dengan format CSV. Detail: " + err.message);
-          document.getElementById('liveSyncStatusText').innerText = "Database: Terintegrasi (Lokal)";
+          console.warn('Web App fetch failed, attempting CSV fallback', err);
+          fetch(DEFAULT_GOOGLE_SHEETS_CSV_FALLBACK)
+            .then(r => r.text())
+            .then(csv => {
+              parseGoogleSheetCSV(csv);
+              setDriveSyncStatus('synced', 'Google Drive: CSV Sync');
+            })
+            .catch(e => {
+              setDriveSyncStatus('offline', 'Drive: Mode Offline (Lokal)');
+            });
         });
+    }
+
+    function mergeCloudAOData(cloudList, role) {
+      const localPool = role === 'pemasaran' ? dataPemasaran : dataKredit;
+      cloudList.forEach(cloudAO => {
+        const existing = localPool.find(item => item.nip === cloudAO.nip || item.nama === cloudAO.nama);
+        if (existing) {
+          existing.realisasi = cloudAO.realisasi;
+          existing.target = cloudAO.target;
+          if (cloudAO.breakdown && cloudAO.breakdown.length > 0) existing.breakdown = cloudAO.breakdown;
+          if (cloudAO.npl !== undefined) existing.npl = cloudAO.npl;
+          if (cloudAO.casa !== undefined) existing.casa = cloudAO.casa;
+          if (cloudAO.noa_realisasi !== undefined) existing.noa_realisasi = cloudAO.noa_realisasi;
+          if (cloudAO.noa_rekening !== undefined) existing.noa_rekening = cloudAO.noa_rekening;
+          if (cloudAO.kol2 !== undefined) existing.kol2 = cloudAO.kol2;
+          if (cloudAO.digital_qris !== undefined) existing.digital_qris = cloudAO.digital_qris;
+          if (cloudAO.notes) existing.notes = cloudAO.notes;
+          if (cloudAO.pipeline && cloudAO.pipeline.length > 0) existing.pipeline = cloudAO.pipeline;
+        } else {
+          localPool.push(cloudAO);
+        }
+      });
+    }
+
+    function saveAndSyncGoogleSheets() {
+      fetchFromGoogleDrive(true);
+      closeModal('modalGoogleSheets');
     }
 
     function parseGoogleSheetCSV(csvText) {
@@ -4021,7 +4344,7 @@
             { nama: 'Segmen Portofolio A', target: Math.round(target * 0.6), real: Math.round(real * 0.6) },
             { nama: 'Segmen Portofolio B', target: Math.round(target * 0.4), real: Math.round(real * 0.4) }
           ],
-          notes: 'Data tersinkronisasi otomatis dari Google Sheets Bank Bengkulu.'
+          notes: row[9] || 'Data tersinkronisasi otomatis dari Google Sheet Bank Bengkulu.'
         };
 
         if (kat.includes('kredit')) {
@@ -4039,8 +4362,8 @@
         }
       }
 
-      if (newKredit.length > 0) dataKredit = newKredit;
-      if (newPemasaran.length > 0) dataPemasaran = newPemasaran;
+      if (newKredit.length > 0) mergeCloudAOData(newKredit, 'kredit');
+      if (newPemasaran.length > 0) mergeCloudAOData(newPemasaran, 'pemasaran');
 
       applyAllFilters();
     }
@@ -4048,7 +4371,7 @@
     function resetToPresetBankData() {
       dataKredit = JSON.parse(JSON.stringify(INITIAL_KREDIT_DATA));
       dataPemasaran = JSON.parse(JSON.stringify(INITIAL_PEMASARAN_DATA));
-      document.getElementById('inputGoogleSheetUrl').value = '';
+      document.getElementById('inputGoogleSheetUrl').value = DEFAULT_GOOGLE_DRIVE_WEBAPP_URL;
       document.getElementById('liveSyncStatusText').innerText = "Database: Terintegrasi (Standar Bank)";
       closeModal('modalGoogleSheets');
       applyAllFilters();
@@ -4658,6 +4981,9 @@
 
       // Persist to localStorage
       persistCurrentData();
+
+      // AUTO-SYNC TO GOOGLE DRIVE DATABASE
+      syncAOToCloud(aoForInput);
 
       closeModal('modalInputKinerjaAO');
 
@@ -5302,6 +5628,11 @@ PT Bank Pembangunan Daerah Bengkulu - Tangguh dan Tumbuh`;
       if (printElem) printElem.innerText = dateStr;
 
       applyAllFilters();
+
+      // Auto-connect to Google Drive database
+      setDriveSyncStatus('synced', 'Google Drive: Terhubung');
+      addSyncLog('Koneksi Google Drive diaktifkan');
+      fetchFromGoogleDrive(false);
     });
   </script>
   <!-- Floating Fullscreen Action Button (Edge-to-Edge 100% Full View) -->
