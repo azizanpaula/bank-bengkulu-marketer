@@ -182,6 +182,34 @@ Sistem kini dilengkapi dengan manajemen autentikasi berjenjang sehingga setiap A
 
 ---
 
+---
+
+## ☁️ Database Google Drive & Sinkronisasi Otomatis Dua Arah (Two-Way Sync)
+
+Aplikasi SMART-AO kini telah terhubung **secara langsung dan otomatis** dengan database master di Google Drive pribadi Anda:
+
+### 1. Informasi Database & Akses Langsung:
+- **Nama File Spreadsheet**: `Database_SMART_AO_Bank_Bengkulu`
+- **Lokasi**: Google Drive (`azizanpaula@gmail.com`)
+- **Tautan Langsung Spreadsheet**:  
+  👉 **[Buka Spreadsheet Database di Google Drive](https://docs.google.com/spreadsheets/d/1eldnGb4dH361bbn9DhH8yxgEy5IMHnr1UaHllgSXSiI/edit)**
+- **Endpoint API Web App Google Apps Script**:  
+  `https://script.google.com/macros/s/AKfycbx_CcEYqORdBZTL9wRIBs6bQDkAtJcbbvqbhhW0huxWdolomKqkcMt6-s0kQ9UIH7tR/exec`
+
+### 2. Cara Kerja Sinkronisasi Otomatis Saat Input Data:
+1. **Input Kinerja AO Mandiri**:
+   - Saat AO login dan memperbarui capaian realisasi, NPL/CASA, NoA, atau catatan kerja pada form input, data seketika disimpan di perangkat lokal dan **langsung dikirim ke spreadsheet di Google Drive**.
+   - Kolom Realisasi (F), NPL/CASA (G), NoA (H), Kol 2 (I), Catatan (J), dan Timestamp Terakhir Diperbarui (K) pada sheet `Data_AO` otomatis ter-update.
+2. **Pencatatan Pipeline Calon Debitur / Nasabah Baru**:
+   - Saat prospek nasabah baru ditambahkan atau tahapannya dimajukan (*Inisiasi ➔ SLIK ➔ Analisa ➔ Komite ➔ Akad/Cair*), sistem otomatis menyinkronkan data ke sheet `Data_Pipeline` di Google Drive.
+3. **Pemuatan Otomatis Saat Aplikasi Dibuka**:
+   - Setiap kali dashboard dibuka (baik di Google Sites, GitHub Pages, maupun perangkat pimpinan), sistem otomatis menarik angka terbaru dari spreadsheet Google Drive.
+4. **Indikator Live Sync di Header**:
+   - Header dashboard dilengkapi tombol indikator hijau berdenyut: `Google Drive: Terhubung` / `Google Drive: Live Sync` yang menandakan status koneksi aktif.
+   - Klik tombol tersebut untuk membuka modal manajemen sinkronisasi, menarik data secara manual, atau mengunggah seluruh database sekaligus.
+
+---
+
 ## 🔒 Standar Keamanan & Tata Kelola Perbankan (Bank Governance)
 
 Untuk menjaga kerahasiaan target bisnis internal Bank Bengkulu:
