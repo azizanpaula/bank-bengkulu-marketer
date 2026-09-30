@@ -155,6 +155,25 @@
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-800 antialiased flex flex-col font-sans selection:bg-emerald-100 selection:text-bb-greenDark overflow-x-hidden">
 
+  <!-- Top Fullscreen Prompt Banner for Google Sites Viewers -->
+  <aside id="bannerTopFullscreenPrompt" class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 px-3 py-1.5 text-xs font-bold flex flex-wrap items-center justify-between gap-2 shadow-md no-print border-b border-amber-600/30" aria-label="Notifikasi Mode Layar Penuh">
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-slate-950 text-amber-300 text-[10px]">
+        <i class="fa-solid fa-expand"></i>
+      </span>
+      <span>Tampilan Bingkai Terbatas? Dapatkan <strong>Tampilan 100% Layar Penuh (Edge-to-Edge)</strong> di sini:</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button type="button" onclick="openInFullTab()" class="px-3 py-1 bg-slate-950 hover:bg-slate-800 text-amber-300 rounded-lg text-xs font-black tracking-wide transition shadow flex items-center gap-1.5 active:scale-95 border border-amber-400/40">
+        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        <span>Buka Mode 100% Fullscreen</span>
+      </button>
+      <button type="button" onclick="document.getElementById('bannerTopFullscreenPrompt').style.display='none'" class="text-slate-900 hover:text-white p-1" title="Tutup pengingat">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </aside>
+
   <!-- ========================================================================= -->
   <!-- 1. TOP CORPORATE BAR & EXECUTIVE HEADER (BANK BENGKULU) -->
   <!-- ========================================================================= -->
@@ -5248,11 +5267,8 @@ PT Bank Pembangunan Daerah Bengkulu - Tangguh dan Tumbuh`;
 
     function fallbackOpenFullWindow() {
       // Direct standalone URL gives 100% edge-to-edge monitor experience
-      const localUrl = window.location.origin.includes('localhost') || window.location.origin.includes('192.168.') || window.location.protocol === 'file:'
-        ? (window.location.protocol === 'file:' ? window.location.href : 'http://localhost:8080/')
-        : (window.location.href.includes('gstatic.com') ? 'http://localhost:8080/' : window.location.href);
-      
-      window.open(localUrl, '_blank', 'noopener,noreferrer');
+      const fullAppUrl = 'https://azizanpaula.github.io/bank-bengkulu-marketer/';
+      window.open(fullAppUrl, '_blank', 'noopener,noreferrer');
     }
 
     function notifyParentFrameHeight() {
